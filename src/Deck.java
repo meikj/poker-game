@@ -9,6 +9,9 @@ import java.util.List;
  */
 public class Deck {
 
+    // Fresh ordered unshuffled deck for new deck copying purposes
+    private static List<Card> freshDeck;
+
     private List<Card> deck;
     private boolean shuffled;
 
@@ -24,7 +27,9 @@ public class Deck {
      * @param shuffle whether or not the deck should be initially shuffled.
      */
     public Deck(boolean shuffle) {
-        initDeck();
+        if (freshDeck == null)
+            initFreshDeck();
+        deck = new ArrayList<>(freshDeck);
         if (shuffle)
             shuffle();
     }
@@ -85,15 +90,15 @@ public class Deck {
     }
 
     /**
-     * Initialise the deck in order of rank and suit.
+     * Initialise the fresh deck in order of rank and suit.
      */
-    private void initDeck() {
+    private static void initFreshDeck() {
         Card.Suit[] suits = Card.Suit.values();
         Card.Rank[] ranks = Card.Rank.values();
-        deck = new ArrayList<>(suits.length * ranks.length);
+        freshDeck = new ArrayList<>(suits.length * ranks.length);
         for (int i = 0; i < ranks.length; i++)
             for (int j = 0; j < suits.length; j++)
-                deck.add(new Card(suits[j], ranks[i]));
+                freshDeck.add(new Card(suits[j], ranks[i]));
     }
 
 }
