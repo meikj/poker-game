@@ -93,8 +93,8 @@ public class Deck {
      * Initialise the fresh deck in order of rank and suit.
      */
     private static void initFreshDeck() {
-        Card.Suit[] suits = Card.Suit.values();
-        Card.Rank[] ranks = Card.Rank.values();
+        Suit[] suits = Suit.values();
+        Rank[] ranks = Rank.values();
         freshDeck = new ArrayList<>(suits.length * ranks.length);
         for (int i = 0; i < ranks.length; i++)
             for (int j = 0; j < suits.length; j++)
