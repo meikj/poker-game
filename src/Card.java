@@ -5,16 +5,6 @@
  */
 public class Card {
 
-    /**
-     * Card suit.
-     */
-    public enum Suit { HEART, DIAMOND, CLUB, SPADE }
-
-    /**
-     * Card rank.
-     */
-    public enum Rank { ACE, KING, QUEEN, JACK, TEN, NINE, EIGHT, SEVEN, SIX, FIVE, FOUR, THREE, TWO, ONE }
-
     private Suit suit;
     private Rank rank;
 
@@ -42,6 +32,33 @@ public class Card {
      */
     public Rank getRank() {
         return rank;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(rank).append(" of ").append(suit).append("'s");
+        return sb.toString();
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 17;
+        hash = 31 * hash + rank.hashCode();
+        hash = 31 * hash + suit.hashCode();
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null)
+            return false;
+        if (!(obj instanceof Card))
+            return false;
+        if (this == obj)
+            return true;
+        Card c = (Card) obj;
+        return suit.equals(c.suit) && rank.equals(c.rank);
     }
 
 }
